@@ -1,6 +1,7 @@
 package main.java.com.island.entities;
 
 
+import main.java.com.island.entities.geo.Island;
 import main.java.com.island.services.Eatable;
 
 public abstract class Animal {
@@ -12,11 +13,13 @@ public abstract class Animal {
         protected int xPosition;
         protected int yPosition;
         protected boolean alive = true;
+        public boolean hasEatenToday = false;
         private String unicode;
         protected int age = 0;
+        public static int number = 0;
 
         public Animal(String name, double weight, int maxCountPerCell, int movementSpeed, double foodSaturation, String unicode) {
-            this.name = name;
+            this.name = name +   "-" + number++  ;
             this.weight = weight;
             this.maxCountPerCell = maxCountPerCell;
             this.movementSpeed = movementSpeed;
@@ -54,7 +57,32 @@ public abstract class Animal {
     }
 
     public abstract void eat(Eatable prey);
-        public abstract void move();
+
+    // Логіка втрати ваги, якщо тварина не поїла
+
+        public void loseWeightIfHungry() {
+            //if (!hasEatenToday) {  //
+            // Якщо тварина не їла сьогодні
+
+
+            double newWeight = weight - weight * 0.3; // Тварина втрачає 5% ваги
+            if (newWeight <= 0.9 * weight) {
+                alive = false;
+                System.out.println(name + " has died of starvation.");
+            }
+            // }
+        }
+    // Відновлюємо тварину після дня, оновлюємо стан, чи вона їла
+    public void resetForNextDay() {
+        hasEatenToday = false;  // Скидаємо стан на новий день
+    }
+
+    // Збільшення ваги після їжі
+    public void gainWeight(double nutritionValue) {
+        weight += nutritionValue * 0.1;  // Тварина набирає 10% ваги від поживної цінності їжі
+    }
+
+        public abstract void move(Island island);
         public abstract void reproduce();
     }
 

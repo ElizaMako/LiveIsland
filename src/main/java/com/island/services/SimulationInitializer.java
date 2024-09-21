@@ -14,9 +14,9 @@ int dayLength = Integer.parseInt(config.getProperty("day.length"));
 int maxAnimalsPerCell = Integer.parseInt(config.getProperty("max.animals.per.cell"));
 int maxPlantsPerCell = Integer.parseInt(config.getProperty("max.plants.per.cell"));
 
-        IslandGUI gui = new IslandGUI(20,20);
+        IslandGUI gui = new IslandGUI(3,3);
 
-        Simulation simulation = new Simulation(gui, 20,20,maxAnimalsPerCell,maxPlantsPerCell);
+        Simulation simulation = new Simulation(gui, 3,3,maxAnimalsPerCell,maxPlantsPerCell);
 
         simulation.setDayLength(dayLength);
 

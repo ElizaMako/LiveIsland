@@ -4,14 +4,17 @@ import main.java.com.island.entities.Animal;
 import main.java.com.island.entities.Plant;
 import main.java.com.island.entities.herbivore.Herbivore;
 import main.java.com.island.entities.predator.Predator;
+import main.java.com.island.services.Simulation;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Cell {
     private static ConcurrentLinkedQueue<Animal> animals;
+
     private int plantCount;
     private static int maxAnimalsPerCell;
     private int maxPlantsPerCell;
+    int count = 0;
 
     public Cell(int maxAnimalsPerCell, int maxPlantsPerCell) {
         animals = new ConcurrentLinkedQueue<>();
@@ -40,7 +43,7 @@ public class Cell {
         }
     }
 
-    public void removeAnimal(Animal animal) {
+    public synchronized void removeAnimal(Animal animal) {
         animals.remove(animal);
     }
 
@@ -51,11 +54,13 @@ public class Cell {
     }
 
     //логіка поїдання тварин на одній клітинці
-    public void processInteractions() {
+    public void processInteractions(Island island, Simulation simulation) {
         // Розділимо тварин на хижаків і травоїдних
         ConcurrentLinkedQueue<Herbivore> herbivores = new ConcurrentLinkedQueue<>();
         ConcurrentLinkedQueue<Predator> predators = new ConcurrentLinkedQueue<>();
 
+
+//
         for (Animal animal : animals) {
             if (animal instanceof Herbivore) {
                 herbivores.add((Herbivore) animal);
@@ -64,17 +69,36 @@ public class Cell {
             }
         }
 
+        //Переміщення
+//        for (Herbivore herbivore : herbivores) {
+//            if (herbivore.isAlive()) {
+//                herbivore.move();
+//            }
+//        }
+//        for (Predator predator : predators) {
+//            if (predator.isAlive()) {
+//                predator.move();
+//            }
+//        }
+
         // Поїдання травоїдних хижаками
         for (Predator predator : predators) {
-            for (Herbivore herbivore : herbivores) {
+            Herbivore herbivore = herbivores.peek();
+            //for (Herbivore herbivore : herbivores) {
                 if (predator.isAlive() && herbivore.isAlive()) {
                     predator.eat(herbivore);
-                    if (!herbivore.isAlive()) {
-                        removeAnimal(herbivore);
-                        break;  // Вовк з'їв кролика — більше нічого не робимо з ним
-                    }
+//                    if (!herbivore.isAlive()) {
+//                        removeAnimal(herbivore);
+//                        count++;
+//                        simulation.incrementEatenAnimalsCount();  // Підрахунок з'їдених тварин
+//                        break;  // Вовк з'їв кролика — більше нічого не робимо з ним
+//                    }
+                    removeAnimal(herbivore);
+                    count++;
+                    simulation.incrementEatenAnimalsCount();
                 }
-            }
+            //}
+
         }
 
         // Поїдання рослин травоїдними
@@ -83,6 +107,24 @@ public class Cell {
                 if (plantCount > 0) {
                     herbivore.eat(new Plant());  // Травоїдний їсть рослину
                     removePlant();
+                }
+            }
+        }
+
+        // Переміщення тварин після взаємодій!!!!!NEW METHOD! CHECK
+        for (Animal animal : animals) {
+            if (animal.isAlive()) {
+                animal.move(island);  // Викликається специфічний метод move для кожної тварини
+            }
+        }
+        // Після взаємодії тварин: перевіряємо їхній стан (чи поїли) і обробляємо втрату ваги
+        for (Animal animal : animals) {
+            if (animal.isAlive()) {
+                animal.loseWeightIfHungry();// Якщо тварина не їла, вона втрачає вагу
+                if (!animal.isAlive()) {
+                    animals.remove(animal);
+                } else {
+                    animal.resetForNextDay();  // Скидаємо стан для нового дня
                 }
             }
         }
@@ -98,5 +140,20 @@ public class Cell {
                 predator.reproduce();
             }
         }
+
+        ///переміщення????
+//        for (Herbivore herbivore : herbivores) {
+//            if (herbivore.isAlive()) {
+//                herbivore.move();
+//            }
+//        }
+//        for (Predator predator : predators) {
+//            if (predator.isAlive()) {
+//                predator.move();
+//            }
+//        }
+       for (Animal animal : animals) {
+           animal.hasEatenToday = false;
+       }
     }
 }

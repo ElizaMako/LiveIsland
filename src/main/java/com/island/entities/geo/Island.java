@@ -1,6 +1,7 @@
 package main.java.com.island.entities.geo;
 
 import main.java.com.island.entities.Animal;
+import main.java.com.island.services.Simulation;
 
 public class Island {
     private static Cell[][] cells;  // Двовимірний масив клітинок

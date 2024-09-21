@@ -8,13 +8,13 @@ import main.java.com.island.services.Eatable;
 
 import java.util.Random;
 
-public class Rabbit extends Herbivore implements Eatable{
-    public Rabbit(String name, double weight, int maxCountPerCell, int movementSpeed, double foodSaturation, String unicode) {
+public class Mouse extends Herbivore implements Eatable {
+    public Mouse(String name, double weight, int maxCountPerCell, int movementSpeed, double foodSaturation, String unicode) {
         super(name, weight, maxCountPerCell, movementSpeed, foodSaturation, unicode);
     }
-    public Rabbit() {
+    public Mouse() {
         // Виклик конструктора з параметрами для травоїдного
-        super("Rabbit", 2, 5, 3, 1, "\uD83D\uDC07");  // Ініціалізуємо кролика з параметрами за замовчуванням
+        super("Mouse", 0.5, 5, 3, 1, "\uD83D\uDC2D");  // Ініціалізуємо кролика з параметрами за замовчуванням
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Rabbit extends Herbivore implements Eatable{
                 Rabbit offspring = new Rabbit();
                 offspring.setPosition(xPosition, yPosition);
                 Island.placeAnimal(xPosition,yPosition, offspring);
-                System.out.println("Rabbit reproduced.");
+                System.out.println("Mouse reproduced.");
             }
         }
     }
@@ -55,7 +55,7 @@ public class Rabbit extends Herbivore implements Eatable{
         //int newY = yOffset + yPosition;
         //int newX = xOffset +xPosition;
 
-        System.out.println(name + " (Rabbit) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
+        System.out.println(name + " (Mouse) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
         xPosition = newX;
         yPosition = newY;
     }

@@ -9,14 +9,14 @@ import main.java.com.island.services.Eatable;
 
 import java.util.Random;
 
-public class Wolf extends Predator {
-    public Wolf(String name, double weight, int maxCountPerCell, int movementSpeed, double foodSaturation, String unicode) {
+public class Fox extends Predator {
+    public Fox(String name, double weight, int maxCountPerCell, int movementSpeed, double foodSaturation, String unicode) {
         super(name, weight, maxCountPerCell, movementSpeed, foodSaturation, unicode);
     }
 
-    public Wolf() {
+    public Fox() {
         // Виклик конструктора з параметрами для хижака
-        super("Wolf", 50, 5, 3, 8, "\uD83D\uDC3A");  // Ініціалізуємо вовка з параметрами за замовчуванням
+        super("Fox", 40, 5, 2, 4, "\uD83E\uDD8A");  // Ініціалізуємо вовка з параметрами за замовчуванням
     }
     @Override
     public void eat(Eatable prey) {
@@ -41,13 +41,13 @@ public class Wolf extends Predator {
                 Wolf offspring = new Wolf();
                 offspring.setPosition(xPosition, yPosition);
                 Island.placeAnimal(xPosition,yPosition, offspring);
-                System.out.println("Wolf reproduced.");
+                System.out.println("Fox reproduced.");
             }
         }
     }
 
     //@Override
-    public synchronized void  move(Island island) {
+    public synchronized void move(Island island) {
         Random random = new Random();
         int xOffset = random.nextInt(2 * movementSpeed + 1) - movementSpeed;
         int yOffset = random.nextInt(2 * movementSpeed + 1) - movementSpeed;
@@ -57,22 +57,9 @@ public class Wolf extends Predator {
         //int newY = yOffset + yPosition;
         //int newX = xOffset +xPosition;
 
-        System.out.println(name + " (Wolf) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
+        System.out.println(name + " (Fox) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
         xPosition = newX;
         yPosition = newY;
-    }
-    @Override
-    public void loseWeightIfHungry() {
-        //if (!hasEatenToday) {  //
-        // Якщо тварина не їла сьогодні
-
-
-        double newWeight = weight - weight * 0.3; // Тварина втрачає 5% ваги
-        if (newWeight <= 0.9 * weight) {
-            alive = false;
-            System.out.println(name + " has died of starvation.");
-        }
-        // }
     }
 }
 

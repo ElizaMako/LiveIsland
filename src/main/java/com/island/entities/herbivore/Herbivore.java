@@ -1,6 +1,7 @@
 package main.java.com.island.entities.herbivore;
 
 import main.java.com.island.entities.Animal;
+import main.java.com.island.entities.geo.Island;
 import main.java.com.island.services.Eatable;
 
 public class Herbivore extends Animal implements Eatable {
@@ -14,7 +15,7 @@ public class Herbivore extends Animal implements Eatable {
     }
 
     @Override
-    public void move() {
+    public void move(Island island) {
 
     }
 
