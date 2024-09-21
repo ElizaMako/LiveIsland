@@ -8,15 +8,15 @@ import main.java.com.island.entities.predator.Predator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Cell {
-    private ConcurrentLinkedQueue<Animal> animals;
+    private static ConcurrentLinkedQueue<Animal> animals;
     private int plantCount;
-    private int maxAnimalsPerCell;
+    private static int maxAnimalsPerCell;
     private int maxPlantsPerCell;
 
     public Cell(int maxAnimalsPerCell, int maxPlantsPerCell) {
-        this.animals = new ConcurrentLinkedQueue<>();
+        animals = new ConcurrentLinkedQueue<>();
         this.plantCount = 0;
-        this.maxAnimalsPerCell = maxAnimalsPerCell;
+        Cell.maxAnimalsPerCell = maxAnimalsPerCell;
         this.maxPlantsPerCell = maxPlantsPerCell;
     }
 
@@ -28,7 +28,7 @@ public class Cell {
         return plantCount;
     }
 
-    public void addAnimal(Animal animal) {
+    public  void addAnimal(Animal animal) {
         if (animals.size() < maxAnimalsPerCell) {
             animals.add(animal);
         }

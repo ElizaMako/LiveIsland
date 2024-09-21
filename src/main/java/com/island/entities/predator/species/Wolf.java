@@ -1,6 +1,8 @@
 package main.java.com.island.entities.predator.species;
 
 import main.java.com.island.entities.Animal;
+import main.java.com.island.entities.geo.Cell;
+import main.java.com.island.entities.geo.Island;
 import main.java.com.island.entities.herbivore.Herbivore;
 import main.java.com.island.entities.predator.Predator;
 import main.java.com.island.services.Eatable;
@@ -27,7 +29,17 @@ public class Wolf extends Predator {
 
     @Override
     public void reproduce() {
-        // Логіка розмноження
+
+        // Логіка розмноження !!!! Переробити
+        if (age >= 2 && Math.random() < 0.3) {
+            int offspringCount = (int) (Math.random() * 3) + 1;
+            for (int i = 0; i < offspringCount; i++) {
+                Wolf offspring = new Wolf();
+                offspring.setPosition(xPosition, yPosition);
+                Island.placeAnimal(xPosition,yPosition, offspring);
+                System.out.println("Wolf reproduced.");
+            }
+        }
     }
 
     @Override

@@ -13,6 +13,7 @@ public abstract class Animal {
         protected int yPosition;
         protected boolean alive = true;
         private String unicode;
+        protected int age = 0;
 
         public Animal(String name, double weight, int maxCountPerCell, int movementSpeed, double foodSaturation, String unicode) {
             this.name = name;

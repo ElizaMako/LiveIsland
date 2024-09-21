@@ -3,7 +3,7 @@ package main.java.com.island.entities.geo;
 import main.java.com.island.entities.Animal;
 
 public class Island {
-    private Cell[][] cells;  // Двовимірний масив клітинок
+    private static Cell[][] cells;  // Двовимірний масив клітинок
     private int rows;
     private int cols;
 
@@ -36,7 +36,7 @@ public class Island {
     }
 
     // Додаємо тварину на клітинку
-    public void placeAnimal(int row, int col, Animal animal) {
+    public static void placeAnimal(int row, int col, Animal animal) {
         cells[row][col].addAnimal(animal);
     }
 
