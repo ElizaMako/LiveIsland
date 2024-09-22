@@ -49,7 +49,7 @@ public class Simulation {
     private void placeInitialAnimalsAndPlants() {
         // Створимо карту типів тварин і кількості для автоматичного розміщення
         Map<Supplier<Animal>, Integer> animalTypes = Map.of(
-                Wolf::new, 5,
+                Wolf::new, 6,
                 Rabbit::new, 20
                 //Mouse::new, 4,
                 //Fox::new,2
@@ -108,7 +108,7 @@ public class Simulation {
     private void startSimulationThreads() {
         animalLifeCycleScheduler.scheduleAtFixedRate(this::runSimulationCycle, 5, 1, TimeUnit.SECONDS);
         statisticsScheduler.scheduleAtFixedRate(this::printStatistics, 0, 1, TimeUnit.SECONDS);
-        //plantGrowthScheduler.scheduleAtFixedRate(this::growPlants, 10, 1, TimeUnit.SECONDS);
+        plantGrowthScheduler.scheduleAtFixedRate(this::growPlants, 4, 1, TimeUnit.SECONDS);
 
     }
 

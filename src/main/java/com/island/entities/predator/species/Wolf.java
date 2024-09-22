@@ -6,8 +6,10 @@ import main.java.com.island.entities.geo.Island;
 import main.java.com.island.entities.herbivore.Herbivore;
 import main.java.com.island.entities.predator.Predator;
 import main.java.com.island.services.Eatable;
+import main.java.com.island.services.Simulation;
 
 import java.util.Random;
+
 
 public class Wolf extends Predator {
     public Wolf(String name, double weight, int maxCountPerCell, int movementSpeed, double foodSaturation, String unicode) {
@@ -20,12 +22,13 @@ public class Wolf extends Predator {
     }
     @Override
     public void eat(Eatable prey) {
-        if (prey instanceof Herbivore && Math.random() < 0.6) {  // 60% ймовірність успіху
+        if (prey instanceof Herbivore && Math.random() < 0.7) {  // 60% ймовірність успіху
             this.foodSaturation += prey.getNutritionValue();  // Насичення збільшується
             this.gainWeight(prey.getNutritionValue());  // Набирає вагу після поїдання
             this.hasEatenToday = true;  // Встановлюємо, що тварина поїла сьогодні
             System.out.println(name + " has eaten " + ((Animal) prey).getName());
             ((Animal) prey).setAlive(false);
+
         } else {
             System.out.println(name + " missed the prey.");
         }
@@ -33,7 +36,6 @@ public class Wolf extends Predator {
 
     @Override
     public void reproduce() {
-
         // Логіка розмноження !!!! Переробити
         if (age >= 2 && Math.random() < 0.3) {
             int offspringCount = (int) (Math.random() * 3) + 1;
@@ -42,6 +44,7 @@ public class Wolf extends Predator {
                 offspring.setPosition(xPosition, yPosition);
                 Island.placeAnimal(xPosition,yPosition, offspring);
                 System.out.println("Wolf reproduced.");
+
             }
         }
     }
@@ -61,18 +64,18 @@ public class Wolf extends Predator {
         xPosition = newX;
         yPosition = newY;
     }
-    @Override
-    public void loseWeightIfHungry() {
-        //if (!hasEatenToday) {  //
-        // Якщо тварина не їла сьогодні
-
-
-        double newWeight = weight - weight * 0.3; // Тварина втрачає 5% ваги
-        if (newWeight <= 0.9 * weight) {
-            alive = false;
-            System.out.println(name + " has died of starvation.");
-        }
-        // }
-    }
+//    @Override
+//    public void loseWeightIfHungry() {
+//        //if (!hasEatenToday) {  //
+//        // Якщо тварина не їла сьогодні
+//
+//
+//        double newWeight = weight - weight * 0.3; // Тварина втрачає 5% ваги
+//        if (newWeight <= 0.9 * weight) {
+//            alive = false;
+//            System.out.println(name + " has died of starvation.");
+//        }
+//        // }
+//    }
 }
 

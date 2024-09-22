@@ -65,8 +65,8 @@ public abstract class Animal {
             // Якщо тварина не їла сьогодні
 
 
-            double newWeight = weight - weight * 0.3; // Тварина втрачає 5% ваги
-            if (newWeight <= 0.9 * weight) {
+            double newWeight = weight - weight * 0.15; // Тварина втрачає % ваги
+            if (newWeight <= 0.81 * weight) {
                 alive = false;
                 System.out.println(name + " has died of starvation.");
             }

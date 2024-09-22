@@ -96,6 +96,7 @@ public class Cell {
                     removeAnimal(herbivore);
                     count++;
                     simulation.incrementEatenAnimalsCount();
+
                 }
             //}
 
@@ -131,27 +132,22 @@ public class Cell {
 
         // Логіка розмноження, якщо тварини вижили після взаємодії
         for (Herbivore herbivore : herbivores) {
-            if (herbivore.isAlive()) {
+            //if (herbivore.isAlive()) {
                 herbivore.reproduce();
-            }
+                addAnimal(herbivore);
+                System.out.println(herbivore.getName() + " reproduced");
+            //}
         }
         for (Predator predator : predators) {
-            if (predator.isAlive()) {
+            //if (predator.isAlive()) {
                 predator.reproduce();
-            }
+                addAnimal(predator);
+            System.out.println(predator.getName() + " reproduced");
+
+           // }
         }
 
-        ///переміщення????
-//        for (Herbivore herbivore : herbivores) {
-//            if (herbivore.isAlive()) {
-//                herbivore.move();
-//            }
-//        }
-//        for (Predator predator : predators) {
-//            if (predator.isAlive()) {
-//                predator.move();
-//            }
-//        }
+
        for (Animal animal : animals) {
            animal.hasEatenToday = false;
        }

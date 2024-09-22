@@ -2,6 +2,7 @@ package main.java.com.island.entities.predator;
 
 import main.java.com.island.entities.Animal;
 import main.java.com.island.entities.geo.Island;
+import main.java.com.island.entities.predator.species.Wolf;
 import main.java.com.island.services.Eatable;
 
 import java.util.Random;
@@ -27,7 +28,7 @@ public class Predator extends Animal{
         //int newY = yOffset + yPosition;
         //int newX = xOffset +xPosition;
 
-        System.out.println(name + " (Wolf) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
+        System.out.println(name + "  moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
         xPosition = newX;
         yPosition = newY;
     }
