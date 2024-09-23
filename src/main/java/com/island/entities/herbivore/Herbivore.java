@@ -19,11 +19,8 @@ public class Herbivore extends Animal implements Eatable {
 
     }
 
-   // @Override
-
+    @Override
     public void reproduce() {
-
-
     }
 
     @Override

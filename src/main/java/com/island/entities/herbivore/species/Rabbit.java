@@ -23,15 +23,13 @@ public class Rabbit extends Herbivore implements Eatable{
             this.foodSaturation += food.getNutritionValue();  // Насичення збільшується
             this.gainWeight(food.getNutritionValue());  // Набирає вагу після поїдання рослини
             this.hasEatenToday = true;  // Встановлюємо, що тварина поїла сьогодні
-            System.out.println(name + " has eaten a plant.");
+          //  System.out.println(name + " has eaten a plant.");
         } else {
             System.out.println(name + " cannot eat this.");
         }
     }
-
-    @Override
+@Override
     public void reproduce() {
-
         // Логіка розмноження !!!! Переробити
         if (age >= 2 && Math.random() < 0.3) {
             int offspringCount = (int) (Math.random() * 3) + 1;
@@ -39,7 +37,7 @@ public class Rabbit extends Herbivore implements Eatable{
                 Rabbit offspring = new Rabbit();
                 offspring.setPosition(xPosition, yPosition);
                 Island.placeAnimal(xPosition,yPosition, offspring);
-                System.out.println("Rabbit reproduced.");
+               // System.out.println("Rabbit reproduced.");
             }
         }
     }
@@ -55,7 +53,7 @@ public class Rabbit extends Herbivore implements Eatable{
         //int newY = yOffset + yPosition;
         //int newX = xOffset +xPosition;
 
-        System.out.println(name + " (Rabbit) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
+       // System.out.println(name + " (Rabbit) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
         xPosition = newX;
         yPosition = newY;
     }

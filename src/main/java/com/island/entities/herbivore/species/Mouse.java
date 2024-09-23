@@ -1,6 +1,8 @@
 package main.java.com.island.entities.herbivore.species;
 
+import main.java.com.island.entities.Animal;
 import main.java.com.island.entities.Plant;
+import main.java.com.island.entities.geo.Cell;
 import main.java.com.island.entities.geo.Island;
 import main.java.com.island.entities.herbivore.Herbivore;
 import main.java.com.island.entities.predator.species.Wolf;
@@ -23,23 +25,26 @@ public class Mouse extends Herbivore implements Eatable {
             this.foodSaturation += food.getNutritionValue();  // Насичення збільшується
             this.gainWeight(food.getNutritionValue());  // Набирає вагу після поїдання рослини
             this.hasEatenToday = true;  // Встановлюємо, що тварина поїла сьогодні
-            System.out.println(name + " has eaten a plant.");
+           // System.out.println(name + " has eaten a plant.");
+
         } else {
             System.out.println(name + " cannot eat this.");
         }
     }
 
-    @Override
+@Override
     public void reproduce() {
-
         // Логіка розмноження !!!! Переробити
         if (age >= 2 && Math.random() < 0.3) {
             int offspringCount = (int) (Math.random() * 3) + 1;
             for (int i = 0; i < offspringCount; i++) {
-                Rabbit offspring = new Rabbit();
+                Mouse offspring = new Mouse();
                 offspring.setPosition(xPosition, yPosition);
                 Island.placeAnimal(xPosition,yPosition, offspring);
-                System.out.println("Mouse reproduced.");
+                //System.out.println("Mouse reproduced.");
+                ////Cell cell = new Cell();
+                //cell.addAnimal(offspring);
+                //Cell.addAnimals(offspring);
             }
         }
     }
@@ -55,7 +60,7 @@ public class Mouse extends Herbivore implements Eatable {
         //int newY = yOffset + yPosition;
         //int newX = xOffset +xPosition;
 
-        System.out.println(name + " (Mouse) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
+        //System.out.println(name + " (Mouse) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
         xPosition = newX;
         yPosition = newY;
     }

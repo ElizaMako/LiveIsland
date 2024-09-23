@@ -24,24 +24,24 @@ public class Fox extends Predator {
             this.foodSaturation += prey.getNutritionValue();  // Насичення збільшується
             this.gainWeight(prey.getNutritionValue());  // Набирає вагу після поїдання
             this.hasEatenToday = true;  // Встановлюємо, що тварина поїла сьогодні
-            System.out.println(name + " has eaten " + ((Animal) prey).getName());
+           // System.out.println(name + " has eaten " + ((Animal) prey).getName());
             ((Animal) prey).setAlive(false);
         } else {
-            System.out.println(name + " missed the prey.");
+         //   System.out.println(name + " missed the prey.");
         }
     }
 
-    @Override
+    //@Override
     public void reproduce() {
 
         // Логіка розмноження !!!! Переробити
         if (age >= 2 && Math.random() < 0.3) {
             int offspringCount = (int) (Math.random() * 3) + 1;
             for (int i = 0; i < offspringCount; i++) {
-                Wolf offspring = new Wolf();
+                Fox offspring = new Fox();
                 offspring.setPosition(xPosition, yPosition);
                 Island.placeAnimal(xPosition,yPosition, offspring);
-                System.out.println("Fox reproduced.");
+                //System.out.println("Fox reproduced.");
             }
         }
     }
@@ -57,7 +57,7 @@ public class Fox extends Predator {
         //int newY = yOffset + yPosition;
         //int newX = xOffset +xPosition;
 
-        System.out.println(name + " (Fox) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
+        //System.out.println(name + " (Fox) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
         xPosition = newX;
         yPosition = newY;
     }

@@ -16,7 +16,16 @@ public abstract class Animal {
         public boolean hasEatenToday = false;
         private String unicode;
         protected int age = 0;
-        public static int number = 0;
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public static int number = 0;
 
         public Animal(String name, double weight, int maxCountPerCell, int movementSpeed, double foodSaturation, String unicode) {
             this.name = name +   "-" + number++  ;
@@ -61,12 +70,8 @@ public abstract class Animal {
     // Логіка втрати ваги, якщо тварина не поїла
 
         public void loseWeightIfHungry() {
-            //if (!hasEatenToday) {  //
-            // Якщо тварина не їла сьогодні
-
-
-            double newWeight = weight - weight * 0.15; // Тварина втрачає % ваги
-            if (newWeight <= 0.81 * weight) {
+            double newWeight = weight - weight * 0.22; // Тварина втрачає % ваги
+            if (newWeight <= 0.7 * weight) {
                 alive = false;
                 System.out.println(name + " has died of starvation.");
             }

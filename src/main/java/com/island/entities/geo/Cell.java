@@ -6,6 +6,9 @@ import main.java.com.island.entities.herbivore.Herbivore;
 import main.java.com.island.entities.predator.Predator;
 import main.java.com.island.services.Simulation;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Cell {
@@ -23,6 +26,17 @@ public class Cell {
         this.maxPlantsPerCell = maxPlantsPerCell;
     }
 
+    public Cell() {
+
+    }
+
+
+    public static void addAnimals(Animal animal) {
+        if (animals.size() < maxAnimalsPerCell) {
+            animals.add(animal);
+        }
+    }
+
     public ConcurrentLinkedQueue<Animal> getAnimals() {
         return animals;
     }
@@ -37,8 +51,25 @@ public class Cell {
         }
     }
 
+//    public Animal randomElement = getRandomElement(animals);
+//
+//    //нові до addPlant
+//    public Animal getRandomElement(ConcurrentLinkedQueue<Animal> animals) {
+//        List<Animal> list = new ArrayList<>(animals);
+//        if (list.isEmpty()) {
+//            return null; // або обробка випадку порожньої черги
+//        }
+//        Random random = new Random();
+//        return list.get(random.nextInt(list.size()));
+//    }
+
     public void addPlant() {
         if (plantCount < maxPlantsPerCell) {
+            plantCount++;
+            plantCount++;
+            plantCount++;
+            plantCount++;
+            plantCount++;
             plantCount++;
         }
     }
@@ -69,17 +100,6 @@ public class Cell {
             }
         }
 
-        //Переміщення
-//        for (Herbivore herbivore : herbivores) {
-//            if (herbivore.isAlive()) {
-//                herbivore.move();
-//            }
-//        }
-//        for (Predator predator : predators) {
-//            if (predator.isAlive()) {
-//                predator.move();
-//            }
-//        }
 
         // Поїдання травоїдних хижаками
         for (Predator predator : predators) {
@@ -129,27 +149,38 @@ public class Cell {
                 }
             }
         }
+//        for (Animal animal : animals) {
+//            animal.reproduce();
+//            //animals.add(animal);
+//        }
 
         // Логіка розмноження, якщо тварини вижили після взаємодії
         for (Herbivore herbivore : herbivores) {
-            //if (herbivore.isAlive()) {
+            if (herbivore.isAlive()) {
                 herbivore.reproduce();
-                addAnimal(herbivore);
-                System.out.println(herbivore.getName() + " reproduced");
-            //}
+//                if (Math.random() < 0.1) {
+//                    animals.add(herbivore);
+               // }
+                //System.out.println(herbivore.getName() + " reproduced");
+            }
         }
         for (Predator predator : predators) {
-            //if (predator.isAlive()) {
+            if (predator.isAlive()) {
                 predator.reproduce();
-                addAnimal(predator);
-            System.out.println(predator.getName() + " reproduced");
-
-           // }
-        }
+//                if (Math.random() < 0.1) {
+//                    animals.add(predator);
+//                }
+//                System.out.println(predator.getName() + " reproduced");
+            }
+       }
 
 
        for (Animal animal : animals) {
            animal.hasEatenToday = false;
        }
+        for (Animal animal : animals) {
+            animal.setAge(animal.getAge() + 1);
+        }
     }
+
 }

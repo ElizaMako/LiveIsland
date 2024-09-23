@@ -1,12 +1,10 @@
 package main.java.com.island.entities.predator.species;
 
 import main.java.com.island.entities.Animal;
-import main.java.com.island.entities.geo.Cell;
 import main.java.com.island.entities.geo.Island;
 import main.java.com.island.entities.herbivore.Herbivore;
 import main.java.com.island.entities.predator.Predator;
 import main.java.com.island.services.Eatable;
-import main.java.com.island.services.Simulation;
 
 import java.util.Random;
 
@@ -26,24 +24,24 @@ public class Wolf extends Predator {
             this.foodSaturation += prey.getNutritionValue();  // Насичення збільшується
             this.gainWeight(prey.getNutritionValue());  // Набирає вагу після поїдання
             this.hasEatenToday = true;  // Встановлюємо, що тварина поїла сьогодні
-            System.out.println(name + " has eaten " + ((Animal) prey).getName());
+           // System.out.println(name + " has eaten " + ((Animal) prey).getName());
             ((Animal) prey).setAlive(false);
 
         } else {
-            System.out.println(name + " missed the prey.");
+          //  System.out.println(name + " missed the prey.");
         }
     }
 
     @Override
     public void reproduce() {
         // Логіка розмноження !!!! Переробити
-        if (age >= 2 && Math.random() < 0.3) {
+       if (age >= 2 && Math.random() < 0.4) {
             int offspringCount = (int) (Math.random() * 3) + 1;
             for (int i = 0; i < offspringCount; i++) {
                 Wolf offspring = new Wolf();
                 offspring.setPosition(xPosition, yPosition);
                 Island.placeAnimal(xPosition,yPosition, offspring);
-                System.out.println("Wolf reproduced.");
+               // System.out.println("Wolf reproduced.");
 
             }
         }
@@ -60,22 +58,10 @@ public class Wolf extends Predator {
         //int newY = yOffset + yPosition;
         //int newX = xOffset +xPosition;
 
-        System.out.println(name + " (Wolf) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
+        //System.out.println(name + " (Wolf) moved from (" + xPosition + ", " + yPosition + ") to (" + newX + ", " + newY + ")");
         xPosition = newX;
         yPosition = newY;
     }
-//    @Override
-//    public void loseWeightIfHungry() {
-//        //if (!hasEatenToday) {  //
-//        // Якщо тварина не їла сьогодні
-//
-//
-//        double newWeight = weight - weight * 0.3; // Тварина втрачає 5% ваги
-//        if (newWeight <= 0.9 * weight) {
-//            alive = false;
-//            System.out.println(name + " has died of starvation.");
-//        }
-//        // }
-//    }
+
 }
 

@@ -2,12 +2,11 @@ package main.java.com.island.entities.predator;
 
 import main.java.com.island.entities.Animal;
 import main.java.com.island.entities.geo.Island;
-import main.java.com.island.entities.predator.species.Wolf;
 import main.java.com.island.services.Eatable;
 
 import java.util.Random;
 
-public class Predator extends Animal{
+public class Predator extends Animal {
     public Predator(String name, double weight, int maxCountPerCell, int movementSpeed, double foodSaturation, String unicode) {
         super(name, weight, maxCountPerCell, movementSpeed, foodSaturation, unicode);
     }
@@ -37,4 +36,9 @@ public class Predator extends Animal{
     public void reproduce() {
 
     }
+
+//    @Override
+//    public void reproduce() {
+//
+//    }
 }

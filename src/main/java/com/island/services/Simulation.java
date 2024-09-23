@@ -31,9 +31,9 @@ public class Simulation {
     public Simulation(IslandGUI gui, int rows, int cols, int maxAnimalsPerCell, int maxPlantsPerCell) {
         this.island = new Island(rows, cols, maxAnimalsPerCell, maxPlantsPerCell);
         this.gui = gui;
-        this.animalLifeCycleScheduler = Executors.newScheduledThreadPool(2);
-        this.plantGrowthScheduler = Executors.newScheduledThreadPool(1);
-        this.statisticsScheduler = Executors.newScheduledThreadPool(1);
+        this.animalLifeCycleScheduler = Executors.newScheduledThreadPool(4);
+        this.plantGrowthScheduler = Executors.newScheduledThreadPool(2);
+        this.statisticsScheduler = Executors.newScheduledThreadPool(4);
     }
 
     public void start() {
@@ -49,10 +49,10 @@ public class Simulation {
     private void placeInitialAnimalsAndPlants() {
         // Створимо карту типів тварин і кількості для автоматичного розміщення
         Map<Supplier<Animal>, Integer> animalTypes = Map.of(
-                Wolf::new, 6,
-                Rabbit::new, 20
-                //Mouse::new, 4,
-                //Fox::new,2
+                Wolf::new, 3,
+                Rabbit::new, 15,
+                Mouse::new, 10,
+                Fox::new,2
 
                 //Fox::new, 20,
                 //Buffalo::new, 15
@@ -65,7 +65,7 @@ public class Simulation {
         }
 
         // Розміщення рослин
-        placePlantsRandomly(100);  // Наприклад, 100 рослин
+        placePlantsRandomly(150);  // Наприклад, 100 рослин
     }
 
     // Метод для рандомного розміщення тварин
@@ -106,9 +106,9 @@ public class Simulation {
     }
 
     private void startSimulationThreads() {
-        animalLifeCycleScheduler.scheduleAtFixedRate(this::runSimulationCycle, 5, 1, TimeUnit.SECONDS);
+        animalLifeCycleScheduler.scheduleAtFixedRate(this::runSimulationCycle, 4, 1, TimeUnit.SECONDS);
         statisticsScheduler.scheduleAtFixedRate(this::printStatistics, 0, 1, TimeUnit.SECONDS);
-        plantGrowthScheduler.scheduleAtFixedRate(this::growPlants, 4, 1, TimeUnit.SECONDS);
+        plantGrowthScheduler.scheduleAtFixedRate(this::growPlants, 0, 1, TimeUnit.SECONDS);
 
     }
 
@@ -123,6 +123,8 @@ public class Simulation {
 
         // Оновлення GUI після кожного циклу
         updateGUI();
+
+
     }
 
     private void growPlants() {
@@ -142,11 +144,12 @@ public class Simulation {
                 Cell cell = island.getCell(row, col);
 
                 // Оновлюємо кожну клітинку в GUI
-                if (cell.getAnimals().size() > 0) {
+                if (!cell.getAnimals().isEmpty()) {
+
                     Animal topAnimal = cell.getAnimals().peek();  // Беремо одну тварину для відображення
                     gui.updateCell(row, col, topAnimal.getUnicode());
-                } else if (cell.getPlantCount() > 0) {
-                    gui.updateCell(row, col, IslandObjects.PLANT.getOneUnicode());
+                //} else if (cell.getPlantCount() > 0) {
+                //    gui.updateCell(row, col, IslandObjects.PLANT.getOneUnicode());
                 } else {
                     gui.updateCell(row, col, "");  // Порожня клітинка
                 }
